@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="th">
+    <head>
+        <form action="register.php" method="post">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>สมัครสมาชิก</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f9f9f9;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .form-container {
+                background: #ffffff;
+                padding: 20px 30px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+            }
+            .form-container h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+            }
+            .form-container label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            .form-container input[type="text"],
+            .form-container input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            .form-container input[type="radio"] {
+                margin-right: 5px;
+            }
+            .form-container .gender-options {
+                margin-bottom: 15px;
+            }
+            .form-container button {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .form-container button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <h2>สมัครสมาชิก</h2>
+            <form action="register.php" method="post">
+                <label for="username">ชื่อผู้ใช้งาน:</label>
+                <input type="text" id="username" name="username" required>
+    
+                <label for="password">รหัสผ่าน:</label>
+                <input type="password" id="password" name="password" required>
+    
+                <label for="name">ชื่อ:</label>
+                <input type="text" id="name" name="name" required>
+    
+                <label>เพศ:</label>
+                <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="ชาย" required>
+                    <label for="male">ชาย</label>
+    
+                    <input type="radio" id="female" name="gender" value="หญิง">
+                    <label for="female">หญิง</label>
+    
+                    <input type="radio" id="other" name="gender" value="อื่นๆ">
+                    <label for="other">อื่นๆ</label>
+                </div>
+    
+                <button type="submit">สมัครสมาชิก</button>
+            </form>
+        </div>
+    </body>
+    </html>
+    
+</body>
