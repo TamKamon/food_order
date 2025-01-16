@@ -132,46 +132,87 @@ $result = $conn->query($sql);
                     while($item = $result->fetch_assoc()) {
                 ?>
                     <div class="col-sm-6 col-lg-3 mb-3 mb-md-0 h-100 pb-4">
-                        <div class="card card-span h-100">
-                            <div class="position-relative">
-                                <?php if ($item['image_url']): ?>
-                                    <img class="img-fluid rounded-3 w-100" src="admin/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" />
-                                <?php else: ?>
-                                    <img class="img-fluid rounded-3 w-100" src="assets/img/default-food.png" alt="Default Image" />
-                                <?php endif; ?>
-                                
-                                <div class="card-actions">
-                                    <div class="badge badge-foodwagon bg-primary p-4">
-                                        <div class="d-flex flex-between-center">
-                                            <div class="text-white fs-7"><?php echo htmlspecialchars($item['preparation_time']); ?></div>
-                                            <div class="d-block text-white fs-2">นาที<br />
-                                                <div class="fw-normal fs-1 mt-2">เวลาทำ</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body px-0">
-                                <h5 class="fw-bold text-1000 text-truncate"><?php echo htmlspecialchars($item['name']); ?></h5>
-                                <span class="badge bg-soft-danger py-2 px-3">
-                                    <span class="fs-1 text-danger">
-                                        <?php echo number_format($item['price'], 2); ?> บาท
-                                    </span>
-                                </span>
-                                <?php if ($item['spicy_level'] != 'ไม่เผ็ด'): ?>
-                                    <span class="badge bg-soft-warning py-2 px-3 ms-2">
-                                        <span class="fs-1 text-warning">
-                                            <?php echo htmlspecialchars($item['spicy_level']); ?>
-                                        </span>
-                                    </span>
-                                <?php endif; ?>
-                                <div class="mt-2 small text-muted">
-                                    <?php echo htmlspecialchars($item['description'] ?: 'ไม่มีคำอธิบาย'); ?>
-                                </div>
-                            </div>
-                            <a class="stretched-link" href="menu_detail.php?id=<?php echo $item['item_id']; ?>"></a>
+   <div class="card card-span h-100">
+        <div class="position-relative">
+            <?php if ($item['image_url']): ?>
+                <img class="img-fluid rounded-3 w-100" src="admin/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" />
+            <?php else: ?>
+                <img class="img-fluid rounded-3 w-100" src="assets/img/default-food.png" alt="Default Image" />
+            <?php endif; ?>
+            
+            <div class="card-actions">
+                <div class="badge badge-foodwagon bg-primary p-4">
+                    <div class="d-flex flex-between-center">
+                        <div class="text-white fs-7"><?php echo htmlspecialchars($item['preparation_time']); ?></div>
+                        <div class="d-block text-white fs-2">นาที<br />
+                            <div class="fw-normal fs-1 mt-2">เวลาทำ</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0">
+            <h5 class="fw-bold text-1000 text-truncate"><?php echo htmlspecialchars($item['name']); ?></h5>
+            <span class="badge bg-soft-danger py-2 px-3">
+                <span class="fs-1 text-danger">
+                    <?php echo number_format($item['price'], 2); ?> บาท
+                </span>
+            </span>
+            <?php if ($item['spicy_level'] != 'ไม่เผ็ด'): ?>
+                <span class="badge bg-soft-warning py-2 px-3 ms-2">
+                    <span class="fs-1 text-warning">
+                        <?php echo htmlspecialchars($item['spicy_level']); ?>
+                    </span>
+                </span>
+            <?php endif; ?>
+            <div class="mt-2 small text-muted">
+                <?php echo htmlspecialchars($item['description'] ?: 'ไม่มีคำอธิบาย'); ?>
+            </div>
+        </div>
+        <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#menuModal<?php echo $item['item_id']; ?>"></a>
+    </div>
+</div>
+
+<!-- Modal Popup -->
+<div class="modal fade" id="menuModal<?php echo $item['item_id']; ?>" tabindex="-1" aria-labelledby="menuModalLabel<?php echo $item['item_id']; ?>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="menuModalLabel<?php echo $item['item_id']; ?>">
+                    <?php echo htmlspecialchars($item['name']); ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <?php if ($item['image_url']): ?>
+                        <img class="img-fluid rounded-3" style="max-height: 200px;" src="admin/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" />
+                    <?php endif; ?>
+                </div>
+                <p><strong>ราคา:</strong> <?php echo number_format($item['price'], 2); ?> บาท</p>
+                <?php if ($item['spicy_level'] != 'ไม่เผ็ด'): ?>
+                    <p><strong>ระดับความเผ็ด:</strong> <?php echo htmlspecialchars($item['spicy_level']); ?></p>
+                <?php endif; ?>
+                <p><strong>เวลาเตรียม:</strong> <?php echo htmlspecialchars($item['preparation_time']); ?> นาที</p>
+                <p><strong>รายละเอียด:</strong> <?php echo htmlspecialchars($item['description'] ?: 'ไม่มีคำอธิบาย'); ?></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิกการสั่งอาหาร</button>
+                <button type="button" class="btn btn-primary" onclick="confirmOrder(<?php echo $item['item_id']; ?>)">ยืนยันการสั่งอาหาร</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function confirmOrder(itemId) {
+    // ส่วนนี้คุณสามารถเพิ่มโค้ดสำหรับการจัดการการสั่งอาหาร
+    // เช่น ส่ง AJAX request ไปยังเซิร์ฟเวอร์
+    alert('ยืนยันการสั่งอาหารเรียบร้อยแล้ว');
+    // ปิด modal
+    var modal = bootstrap.Modal.getInstance(document.getElementById('menuModal' + itemId));
+    modal.hide();
+}
+</script>
                 <?php 
                     }
                 } else {
