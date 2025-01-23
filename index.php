@@ -5,6 +5,13 @@ require 'admin/connect.php';
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+    // เพิ่มที่ด้านบนของ index.php
+session_start();
+
+if (isset($_GET['table'])) {
+    $tableData = json_decode(urldecode($_GET['table']), true);
+    $_SESSION['current_table'] = $tableData;
+}
 }
 
 // Select data from menu_items
